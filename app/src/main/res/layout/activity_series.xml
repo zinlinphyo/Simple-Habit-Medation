@@ -37,13 +37,15 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_launcher_background">
+                    android:background="@drawable/image_flower_background">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_margin="@dimen/margin_medium"
+                        android:clickable="true"
+                        android:foreground="@drawable/bg_ripple_white"
                         android:src="@drawable/ic_add_24dp"
                         android:tint="@color/white_full" />
 
@@ -52,9 +54,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:background="@color/accent"
+                        android:background="@drawable/bg_round_accent"
                         android:drawableLeft="@drawable/ic_play_arrow_24dp"
                         android:drawablePadding="@dimen/margin_medium"
+                        android:paddingLeft="@dimen/margin_xxlarge"
+                        android:paddingRight="@dimen/margin_xxlarge"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_regular_3x"
                         android:text="Start"
                         android:textColor="@color/white_full"
                         android:layout_marginTop="@dimen/margin_medium"/>
@@ -66,7 +72,7 @@
                         android:layout_above="@id/btn_start"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="@dimen/margin_small"
-                        android:text="Simple Habit Stater"
+                        android:text="Simple Habit Starter"
                         android:textColor="@color/white_full"
                         android:textSize="@dimen/text_heading_1x" />
 
@@ -76,7 +82,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:layout_margin="@dimen/margin_card_medium_2"
+                        android:layout_margin="@dimen/margin_medium_2"
+                        android:textSize="@dimen/text_regular_2x"
                         android:text="5 mins"
                         android:textColor="@color/white_full" />
 
@@ -112,36 +119,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@color/primary"
             android:weightSum="3">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Meditate"
-                android:drawableTop="@drawable/ic_play_arrow_24dp"
+                android:drawableTop="@drawable/ic_play_circle_filled_24dp"
                 android:textColor="@color/white_full"
                 android:textSize="@dimen/text_regular_2x"
+                android:layout_margin="@dimen/margin_medium"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Me"
+                android:drawableTop="@drawable/ic_person_24dp"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_regular_2x"
+                android:textAlignment="center"
                 android:layout_margin="@dimen/margin_medium"
                 android:layout_weight="1"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Meditate"
-                android:drawableTop="@drawable/ic_play_arrow_24dp"
+                android:text="More"
+                android:drawableTop="@drawable/ic_more_horiz_24dp"
                 android:textColor="@color/white_full"
                 android:textSize="@dimen/text_regular_2x"
                 android:layout_margin="@dimen/margin_medium"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Meditate"
-                android:drawableTop="@drawable/ic_play_arrow_24dp"
-                android:textColor="@color/white_full"
-                android:textSize="@dimen/text_regular_2x"
-                android:layout_margin="@dimen/margin_medium"
+                android:textAlignment="center"
                 android:layout_weight="1"/>
 
         </LinearLayout>

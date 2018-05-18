@@ -37,6 +37,6 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesViewHolder>{
 
 	@Override
 	public int getItemCount() {
-		return 7;
+		return 5;
 	}
 }
