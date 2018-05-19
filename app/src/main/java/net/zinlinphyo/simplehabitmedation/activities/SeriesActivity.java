@@ -26,10 +26,10 @@ public class SeriesActivity extends AppCompatActivity {
         SeriesAdapter seriesAdapter = new SeriesAdapter(getApplicationContext());
         rvSeries.setAdapter(seriesAdapter);
 
-        RecyclerView rvCategory = findViewById(R.id.rv_category);
-        rvCategory.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getApplicationContext());
-        rvCategory.setAdapter(categoryAdapter);
+//        RecyclerView rvCategory = findViewById(R.id.rv_category);
+//        rvCategory.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//        CategoryAdapter categoryAdapter = new CategoryAdapter(getApplicationContext());
+//        rvCategory.setAdapter(categoryAdapter);
 
 //        ImageView imageView = findViewById(R.id.iv_hero_image);
 //        Glide
