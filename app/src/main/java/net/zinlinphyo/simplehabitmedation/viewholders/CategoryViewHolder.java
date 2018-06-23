@@ -24,6 +24,8 @@ public class CategoryViewHolder extends BaseViewHolder<CategoryVO> implements Ca
 	private ProgramAdapter mProgramAdapter;
 	private View itemView;
 
+	private CategoryVO mCategory;
+
 	public CategoryViewHolder(View itemView, CategoryDelegate categoryDelegate) {
 		super(itemView);
 		this.itemView = itemView;
@@ -35,7 +37,10 @@ public class CategoryViewHolder extends BaseViewHolder<CategoryVO> implements Ca
 
 	@Override
 	public void setData(CategoryVO data) {
+		mCategory = data;
+
 		mProgramAdapter.setNewData(data.getPrograms());
+		mProgramAdapter.setCategory(mCategory);
 
 		tvTitle.setText(data.getTitle());
 	}

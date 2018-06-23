@@ -13,13 +13,16 @@ import com.google.gson.Gson;
 import net.zinlinphyo.simplehabitmedation.R;
 import net.zinlinphyo.simplehabitmedation.adapters.SessionAdapter;
 import net.zinlinphyo.simplehabitmedation.data.models.SimpleHabitModel;
+import net.zinlinphyo.simplehabitmedation.data.vo.CategoryVO;
 import net.zinlinphyo.simplehabitmedation.data.vo.CurrentProgramVO;
 import net.zinlinphyo.simplehabitmedation.data.vo.ProgramVO;
+import net.zinlinphyo.simplehabitmedation.mvp.presenters.DetailsPresenter;
+import net.zinlinphyo.simplehabitmedation.mvp.views.DetailsView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements DetailsView{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,6 +35,8 @@ public class DetailActivity extends AppCompatActivity {
 
     SessionAdapter sessionAdapter;
 
+    private DetailsPresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,31 +45,23 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mPresenter = new DetailsPresenter(this);
+
         sessionAdapter = new SessionAdapter(getApplicationContext());
         rvSession.setAdapter(sessionAdapter);
         rvSession.setLayoutManager(new LinearLayoutManager(this));
 
-        Gson gson = new Gson();
         if (getIntent().getStringExtra("vo").equals("current")) {
 
-            SimpleHabitModel.getInstance().getCurrentProgram();
+            mPresenter.GetCurrentProgram();
 
-            CurrentProgramVO currentProgramVO = SimpleHabitModel.getInstance().getCurrentProgram();
-            getSupportActionBar().setTitle(currentProgramVO.getTitle());
-
-            tvDescription.setText(currentProgramVO.getDescription());
-            sessionAdapter.setNewData(currentProgramVO.getSessions());
-
-        } else if (getIntent().getStringExtra("vo").equals("categories")) {
+        } else
+            if (getIntent().getStringExtra("vo").equals("category")) {
 
             String categoryId = getIntent().getStringExtra("category_id");
             String programId = getIntent().getStringExtra("program_id");
 
-            ProgramVO programVO = SimpleHabitModel.getInstance().getCategoryById(categoryId, programId);
-
-            getSupportActionBar().setTitle(programVO.getTitle());
-            tvDescription.setText(programVO.getDescription());
-            sessionAdapter.setNewData(programVO.getSessions());
+            mPresenter.GetCategoryData(categoryId, programId);
         }
     }
 
@@ -72,5 +69,25 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail, menu);
         return true;
+    }
+
+    @Override
+    public void displayErrorMsg(String errorMsg) {
+
+    }
+
+    @Override
+    public void displayCurrentProgramData(CurrentProgramVO data) {
+        getSupportActionBar().setTitle(data.getTitle());
+
+        tvDescription.setText(data.getDescription());
+        sessionAdapter.setNewData(data.getSessions());
+    }
+
+    @Override
+    public void displayCategoryData(ProgramVO data) {
+        getSupportActionBar().setTitle(data.getTitle());
+        tvDescription.setText(data.getDescription());
+        sessionAdapter.setNewData(data.getSessions());
     }
 }

@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.zinlinphyo.simplehabitmedation.R;
+import net.zinlinphyo.simplehabitmedation.data.vo.CategoryVO;
 import net.zinlinphyo.simplehabitmedation.data.vo.ProgramVO;
 import net.zinlinphyo.simplehabitmedation.delegates.CategoryDelegate;
 
@@ -20,6 +21,7 @@ public class ProgramViewHolder extends BaseViewHolder<ProgramVO> {
 
 	private CategoryDelegate categoryDelegate;
 	private ProgramVO programVO;
+	private CategoryVO mCategory;
 
 	public ProgramViewHolder(View itemView, CategoryDelegate categoryDelegate) {
 		super(itemView);
@@ -33,9 +35,13 @@ public class ProgramViewHolder extends BaseViewHolder<ProgramVO> {
 		tvTopicDuration.setText(data.getAverageLengths().get(0).toString() + " min");
 	}
 
+	public void setCategoryData(CategoryVO category) {
+		mCategory = category;
+	}
+
 	@OnClick(R.id.cv_program_image)
 	void onClickItem(){
-		categoryDelegate.onTapCategory(null, programVO.getProgramId());
+		categoryDelegate.onTapCategory(mCategory.getCategoryId(), programVO.getProgramId());
 	}
 
 }

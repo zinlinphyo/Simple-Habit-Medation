@@ -7,16 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.zinlinphyo.simplehabitmedation.R;
+import net.zinlinphyo.simplehabitmedation.data.vo.CategoryVO;
 import net.zinlinphyo.simplehabitmedation.data.vo.ProgramVO;
 import net.zinlinphyo.simplehabitmedation.delegates.CategoryDelegate;
 import net.zinlinphyo.simplehabitmedation.viewholders.BaseViewHolder;
 import net.zinlinphyo.simplehabitmedation.viewholders.ProgramViewHolder;
 
-public class ProgramAdapter extends BaseRecyclerAdapter<BaseViewHolder, ProgramVO> {
+public class ProgramAdapter extends BaseRecyclerAdapter<ProgramViewHolder, ProgramVO> {
 
 	private LayoutInflater mLayoutInflator;
 
 	private CategoryDelegate categoryDelegate;
+
+	private CategoryVO mCategory;
 
 	public ProgramAdapter(Context context, CategoryDelegate categoryDelegate) {
 		super(context);
@@ -32,12 +35,17 @@ public class ProgramAdapter extends BaseRecyclerAdapter<BaseViewHolder, ProgramV
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull ProgramViewHolder holder, int position) {
 		holder.setData(mData.get(position));
+		holder.setCategoryData(mCategory);
 	}
 
 	@Override
 	public int getItemCount() {
 		return mData.size();
+	}
+
+	public void setCategory(CategoryVO category) {
+		mCategory = category;
 	}
 }
