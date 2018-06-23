@@ -6,7 +6,7 @@
     android:layout_margin="@dimen/margin_medium">
 
     <TextView
-        android:id="@+id/tv_start_here"
+        android:id="@+id/tv_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
@@ -16,9 +16,10 @@
         android:textSize="@dimen/text_regular_3x" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv_current_program"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_start_here"
+        android:layout_below="@id/tv_header_title"
         android:layout_marginBottom="@dimen/margin_large"
         app:cardCornerRadius="@dimen/margin_medium"
         app:cardElevation="@dimen/margin_small">
@@ -55,7 +56,7 @@
                 android:textSize="@dimen/text_regular_3x" />
 
             <TextView
-                android:id="@+id/tv_simple_habit_starter"
+                android:id="@+id/tv_current_program_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/btn_start"
@@ -66,7 +67,7 @@
                 android:textSize="@dimen/text_heading_1x" />
 
             <TextView
-                android:id="@+id/tv_duration"
+                android:id="@+id/tv_current_program_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

@@ -2,81 +2,68 @@ package net.zinlinphyo.simplehabitmedation.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import net.zinlinphyo.simplehabitmedation.R;
-import net.zinlinphyo.simplehabitmedation.viewholders.SeriesViewHolder;
+import net.zinlinphyo.simplehabitmedation.data.vo.CategoryVO;
+import net.zinlinphyo.simplehabitmedation.data.vo.CurrentProgramVO;
+import net.zinlinphyo.simplehabitmedation.data.vo.HomeScreenVO;
+import net.zinlinphyo.simplehabitmedation.data.vo.TopicVO;
+import net.zinlinphyo.simplehabitmedation.delegates.CategoryDelegate;
+import net.zinlinphyo.simplehabitmedation.delegates.CurrentProgramDelegate;
+import net.zinlinphyo.simplehabitmedation.viewholders.BaseViewHolder;
+import net.zinlinphyo.simplehabitmedation.viewholders.CategoryViewHolder;
+import net.zinlinphyo.simplehabitmedation.viewholders.TopicViewHolder;
+import net.zinlinphyo.simplehabitmedation.viewholders.CurrentProgramViewHolder;
 
-public class SeriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class SeriesAdapter extends BaseRecyclerAdapter<BaseViewHolder, HomeScreenVO>{
 
 	private final static int HEADER_VIEW = 0;
 	private final static int SERIES_VIEW = 1;
 	private final static int CATEGORY_VIEW = 2;
 
-	private int layoutRes;
+	private CurrentProgramDelegate currentProgramDelegate;
+	private CategoryDelegate categoryDelegate;
 
-	private LayoutInflater mLayoutInflater;
-	private Context mContex;
+	public SeriesAdapter(Context context, CurrentProgramDelegate currentProgramDelegate, CategoryDelegate categoryDelegate){
+		super(context);
+		if (currentProgramDelegate != null)
+			this.currentProgramDelegate = currentProgramDelegate;
 
-	public SeriesAdapter(Context context){
-		mLayoutInflater = LayoutInflater.from(context);
-		mContex = context;
+		if (categoryDelegate != null)
+			this.categoryDelegate = categoryDelegate;
 	}
 
 	@NonNull
 	@Override
-	public SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		layoutRes = 0;
-		switch (viewType){
-			case HEADER_VIEW: layoutRes = R.layout.view_item_header; break;
-			case SERIES_VIEW: layoutRes = R.layout.view_item_series; break;
-			case CATEGORY_VIEW: layoutRes = R.layout.view_item_category; break;
-		}
-		View view = mLayoutInflater.inflate(layoutRes, parent, false);
+	public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-//		View seriesItemView = mLayoutInflater.inflate(R.layout.view_item_series, parent, false);
-		return new SeriesViewHolder(view);
+		if(viewType == HEADER_VIEW) {
+			View view = mLayoutInflater.inflate(R.layout.view_item_current_program, parent, false);
+			return new CurrentProgramViewHolder(view, currentProgramDelegate);
+		} else if (viewType == SERIES_VIEW){
+			View view = mLayoutInflater.inflate(R.layout.view_item_category, parent, false);
+			return new CategoryViewHolder(view, categoryDelegate);
+		} else if (viewType == CATEGORY_VIEW){
+			View view = mLayoutInflater.inflate(R.layout.view_item_topic, parent, false);
+			return new TopicViewHolder(view);
+		}else {
+			View view = mLayoutInflater.inflate(R.layout.view_item_topic, parent, false);
+			return new TopicViewHolder(view);
+		}
 	}
 
 	@Override
 	public int getItemViewType(int position){
-		if ((position > 2) && (position % 3 == 0)){
-			position = 1;
+		if (mData.get(position) instanceof CurrentProgramVO){
+			return HEADER_VIEW;
+		}else if (mData.get(position) instanceof CategoryVO){
+			return SERIES_VIEW;
+		}else if (mData.get(position) instanceof TopicVO){
+			return CATEGORY_VIEW;
+		}else {
+			return 0;
 		}
-		switch (position){
-			case 0: return HEADER_VIEW;
-			case 1: return SERIES_VIEW;
-			case 2: return CATEGORY_VIEW;
-			default: return CATEGORY_VIEW;
-		}
-	}
-
-	@Override
-	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-		int viewType = getItemViewType(position);
-
-		SeriesViewHolder seriesViewHolder;
-		if (holder.getItemViewType() == 1){
-			seriesViewHolder = (SeriesViewHolder) holder;
-			seriesViewHolder.rvTopic.setLayoutManager(new LinearLayoutManager(mContex, LinearLayoutManager.HORIZONTAL, false));
-			TopicAdapter topicAdapter = new TopicAdapter(mContex);
-			seriesViewHolder.rvTopic.setAdapter(topicAdapter);
-		}
-	}
-
-//	@Override
-//	public void onBindViewHolder(@NonNull SeriesViewHolder holder, int position) {
-//		holder.rvTopic.setLayoutManager(new LinearLayoutManager(mContex, LinearLayoutManager.HORIZONTAL, false));
-//		TopicAdapter topicAdapter = new TopicAdapter(mContex);
-//		holder.rvTopic.setAdapter(topicAdapter);
-//	}
-
-	@Override
-	public int getItemCount() {
-		return 10;
 	}
 }

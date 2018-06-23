@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="150dp"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_medium"
+    app:cardCornerRadius="@dimen/margin_medium"
+    app:cardElevation="@dimen/margin_small">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_topic_image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium"
-        android:background="@color/white_full"
-        app:cardElevation="@dimen/margin_small"
-        app:cardCornerRadius="@dimen/margin_medium">
+        android:layout_height="100dp"
+        android:background="@drawable/pexels_photo_1054201_small">
 
         <ImageView
-            android:id="@+id/iv_topic_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/marguerite_daisy_beautiful_beauty" />
+            android:id="@+id/iv_topic_icon"
+            android:layout_width="32dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_favorite_24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginLeft="@dimen/margin_xxlarge"
+            android:layout_marginBottom="@dimen/margin_medium"/>
 
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/tv_topic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Basics"
+            android:textColor="@color/white_full"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold"
+            android:layout_alignTop="@id/iv_topic_icon"
+            android:layout_toRightOf="@id/iv_topic_icon"
+            android:layout_marginLeft="@dimen/margin_large" />
 
-    <TextView
-        android:id="@+id/tv_topic_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kidness to Self"
-        android:textColor="@color/white_full"
-        android:textSize="@dimen/text_regular_2x"
-        android:layout_below="@id/cv_topic_image"
-        android:layout_marginLeft="@dimen/margin_medium_2"
-        android:layout_marginTop="@dimen/margin_small"/>
+        <TextView
+            android:id="@+id/tv_topic_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_topic_icon"
+            android:layout_below="@id/tv_topic_name"
+            android:text="Learn Meditation Fundamental"
+            android:textColor="@color/white_full"
+            android:textSize="@dimen/text_regular_2x"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_alignBottom="@id/iv_topic_icon"
+            />
 
-    <TextView
-        android:id="@+id/tv_topic_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_topic_name"
-        android:text="9.10.20 mins"
-        android:textColor="@color/white_full"
-        android:textSize="@dimen/text_regular"
-        android:layout_marginLeft="@dimen/margin_medium_2"
-        android:layout_marginTop="@dimen/margin_small" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</android.support.v7.widget.CardView>
